@@ -1,0 +1,57 @@
+﻿@model IEnumerable<StudentManager.Backend.Entities.Exercise>
+
+@{
+    ViewData["Title"] = "Exercises";
+}
+
+<h1 class="Fit-Types-Title">Exercises</h1>
+
+@if(User.IsInRole(WC.Admin)){
+    <p style="display:flex; justify-content:center">
+    <button style="border-radius: 10px ;background-color: rgba(215,109,11,1); margin-top:10px" class="Fit-Types-Create">
+        <a asp-action="Create">Create New</a>
+    </button>
+</p>
+}
+<table class="table table-fit-type">
+    <thead>
+        <tr>
+            <th style="color:#ffffff; font-size: 40px">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th style="color:white; font-size: 40px;">
+                @Html.DisplayNameFor(model => model.CountOfRepeats)
+            </th> 
+            <th style="color:#ffffff; font-size: 40px;">
+                @Html.DisplayNameFor(model => model.Training)
+            </th>
+            <th style="color:#ffffff; font-size: 40px;">
+                @Html.DisplayNameFor(model => model.Video)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="color:#fff">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="color:#fff">
+                @Html.DisplayFor(modelItem => item.CountOfRepeats)
+            </td>
+            <td style="color:#fff">
+                @Html.DisplayFor(modelItem => item.Training.Type)
+            </td>
+            <td style="color:#fff">
+                @Html.DisplayFor(modelItem => item.Video)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

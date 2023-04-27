@@ -1,0 +1,49 @@
+﻿@model IEnumerable<StudentManager.Backend.Entities.Training>
+
+@{
+    ViewData["Title"] = "Trainings";
+}
+
+<h1 class="Fit-Types-Title">Trainings</h1>
+@if (User.IsInRole(WC.Admin))
+{
+    <p>
+        <button class="Fit-Types-Create"><a asp-action="Create">Create New</a></button>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th  style="color:#ffffff; font-size: 40px">
+                @Html.DisplayNameFor(model => model.Type)
+            </th >
+            <th  style="color:#ffffff; font-size: 40px">
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th  style="color:#ffffff; font-size: 40px">
+                @Html.DisplayNameFor(model => model.FitnessProgramId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="color:#fff">
+                    @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td style="color:#fff">
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td style="color:#fff">
+                @Html.DisplayFor(modelItem => item.FitnessProgram.Id)
+            </td>
+            <td>
+                    <button style="border-radius: 10px; background-color: rgba(215,109,11,1)">
+                        <a style="font-size: 30px; color:#fff" asp-controller="Exercises" asp-action="Index" asp-route-id="@item.Id">Find</a>
+                    </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
